@@ -13,6 +13,7 @@ export interface IListResponse {
   total: number;
 }
 export interface IAcronymRepository {
+  findById(id: string): Promise<Acronym | null>;
   findByKey(key: string): Promise<Acronym[]>;
   findFuzzyByValue({
     search,
@@ -21,4 +22,5 @@ export interface IAcronymRepository {
   }: IFuzzyRequest): Promise<IListResponse>;
   list({ from, limit }: IListRequest): Promise<IListResponse>;
   create({ key, value }: ICreateAcronymDTO): Promise<Acronym>;
+  save(acronym: Acronym): Promise<Acronym>;
 }

@@ -1,5 +1,3 @@
-import * as crypto from "crypto";
-
 import { ICreateAcronymDTO } from "../../dtos/ICreateAcronymDTO";
 import { Acronym } from "../../entities/Acronym";
 import {
@@ -12,7 +10,20 @@ import {
 export class FakeAcronymRepository implements IAcronymRepository {
   public acronyms: Acronym[] = [];
 
-  findFuzzyByValue({
+  async findById(id: string): Promise<Acronym | null> {
+    const acronym = this.acronyms.find(ac => ac.id === id);
+    if (acronym) {
+      return acronym;
+    }
+    return null;
+  }
+
+  async findByKey(key: string): Promise<Acronym[]> {
+    const acronyms = this.acronyms.filter(ac => ac.key === key);
+    return acronyms;
+  }
+
+  async findFuzzyByValue({
     search,
     from,
     limit,
@@ -23,18 +34,15 @@ export class FakeAcronymRepository implements IAcronymRepository {
     const total = acronymsWithoutLimit.length;
     const acronymsWithStart = acronymsWithoutLimit.slice(from - 1);
     const acronyms = acronymsWithStart.splice(limit - 1);
-    return Promise.resolve({ acronyms, total });
+    return { acronyms, total };
   }
 
-  async findByKey(key: string): Promise<Acronym[]> {
-    const acronyms = this.acronyms.filter(ac => ac.key === key);
-    return acronyms;
-  }
   async list({ from, limit }: IListRequest): Promise<IListResponse> {
     const { acronyms } = this;
     const total = this.acronyms.length;
     return { acronyms, total };
   }
+
   async create({ key, value }: ICreateAcronymDTO): Promise<Acronym> {
     const acronym = new Acronym();
 
@@ -44,6 +52,16 @@ export class FakeAcronymRepository implements IAcronymRepository {
     acronym.updated_at = new Date();
 
     this.acronyms.push(acronym);
+    return acronym;
+  }
+
+  async save(acronym: Acronym): Promise<Acronym> {
+    const findIndex = this.acronyms.findIndex(
+      findAcronym => findAcronym.id === acronym.id,
+    );
+
+    this.acronyms[findIndex] = acronym;
+
     return acronym;
   }
 }

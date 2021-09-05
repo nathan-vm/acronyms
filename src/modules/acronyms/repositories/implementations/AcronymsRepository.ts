@@ -15,6 +15,14 @@ export class AcronymRepository implements IAcronymRepository {
   constructor() {
     this.repository = getRepository(Acronym);
   }
+
+  async findById(id: string): Promise<Acronym | null> {
+    const [acronym] = await this.repository.find({ id });
+    if (acronym) {
+      return acronym;
+    }
+    return null;
+  }
   async findByKey(key: string): Promise<Acronym[]> {
     const acronyms = await this.repository.find({ key });
     return acronyms;
@@ -56,5 +64,9 @@ export class AcronymRepository implements IAcronymRepository {
 
     await this.repository.save(acronym);
     return acronym;
+  }
+
+  async save(acronym: Acronym): Promise<Acronym> {
+    return this.repository.save(acronym);
   }
 }
