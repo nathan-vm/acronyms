@@ -69,4 +69,7 @@ export class AcronymRepository implements IAcronymRepository {
   async save(acronym: Acronym): Promise<Acronym> {
     return this.repository.save(acronym);
   }
+  async delete(id: string): Promise<void> {
+    await this.repository.delete({ id });
+  }
 }

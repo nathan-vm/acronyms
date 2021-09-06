@@ -23,4 +23,5 @@ export interface IAcronymRepository {
   list({ from, limit }: IListRequest): Promise<IListResponse>;
   create({ key, value }: ICreateAcronymDTO): Promise<Acronym>;
   save(acronym: Acronym): Promise<Acronym>;
+  delete(id: string): Promise<void>;
 }

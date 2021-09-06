@@ -64,4 +64,12 @@ export class FakeAcronymRepository implements IAcronymRepository {
 
     return acronym;
   }
+
+  async delete(id: string): Promise<void> {
+    const findIndex = this.acronyms.findIndex(
+      findAcronym => findAcronym.id === id,
+    );
+
+    this.acronyms.splice(findIndex, 1);
+  }
 }
