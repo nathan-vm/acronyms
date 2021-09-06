@@ -8,6 +8,22 @@ A sample JSON data file will be provided with a base set of acronym definitions.
 
 We expect you to create a NodeJS server using modern best practices for API development.
 
+
+## How to RUN 
+
+### Requirements to run
+- Docker
+- Docker-compose
+- Insomnia or Postman to use the routes
+### How to be able to use ?
+- First up the server with `docker-compose up`
+  - 2 services starts with this command: postgres and the app
+  - be sure nothing is running on PORTS 3333 and 5432
+- The second step is import the acronyms using the route `http://localhost:3333/acronyms/import`
+  - use the file on the root of this repo `acronym.json` to fill the database
+  - send the file using postman or insomnia with MultipartForm with key `file`
+    - if you are using Insomnia, you can easily import the requests with the file in the root of this repo called `insomnia.json`
+- Enjoy :D
 ## Requirements
 
 ### These endpoints should be created:
