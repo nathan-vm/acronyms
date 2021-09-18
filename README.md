@@ -26,17 +26,17 @@ Messaging acronyms are everywhere now. Do you know all of them?
   - ▶ returns a list of acronyms, paginated using query parameters
   - ▶ response headers indicate if there are more results
   - ▶ returns all acronyms that fuzzy match against :search
-- **POST /import**
+- **POST acronyms/import**
   - ▶ receives a multipartform called 'file'
   - ▶ adds the acronyms definitions to the db
-- **POST /acronym**
+- **POST /acronyms**
   - ▶ receives an acronym and definition strings
   - ▶ adds the acronym definition to the db
-- **PUT /acronym/:acronym**
+- **PUT /acronyms/:acronym**
   - ▶ receives an acronym and definition strings
   - ▶ uses an authorization header to ensure acronyms are protected
   - ▶ updates the acronym definition to the db for :acronym
-- **DELETE /acronym/:acronym**
+- **DELETE /acronyms/:acronym**
   - ▶ deletes :acronym
   - ▶ uses an authorization header to ensure acronyms are protected
 
