@@ -1,13 +1,6 @@
-# G2i NodeJS Code Challenge
+# Acronyms
 
 Messaging acronyms are everywhere now. Do you know all of them?
-
-Build a REST API for the **World Texting Foundation**, also known as **WTF**.
-
-A sample JSON data file will be provided with a base set of acronym definitions.
-
-We expect you to create a NodeJS server using modern best practices for API development.
-
 
 ## How to RUN 
 
@@ -24,14 +17,18 @@ We expect you to create a NodeJS server using modern best practices for API deve
   - send the file using postman or insomnia with MultipartForm with key `file`
     - if you are using Insomnia, you can easily import the requests with the file in the root of this repo called `insomnia.json`
 - Enjoy :D
-## Requirements
 
-### These endpoints should be created:
+## The endpoints for use:
 
+- **GET** /auth
+  - ▶ returns a token to use in protected routes
 - **GET /acronym?from=50&limit=10&search=:search**
   - ▶ returns a list of acronyms, paginated using query parameters
   - ▶ response headers indicate if there are more results
   - ▶ returns all acronyms that fuzzy match against :search
+- **POST /import**
+  - ▶ receives a multipartform called 'file'
+  - ▶ adds the acronyms definitions to the db
 - **POST /acronym**
   - ▶ receives an acronym and definition strings
   - ▶ adds the acronym definition to the db
@@ -43,10 +40,4 @@ We expect you to create a NodeJS server using modern best practices for API deve
   - ▶ deletes :acronym
   - ▶ uses an authorization header to ensure acronyms are protected
 
-### What Do We Expect From You
-
-- [] Complete the challenge requirements stated above. 
-- [] Implement an organised and easily understandable Node.js code following best practices
-- [] Include clear instructions and requirements for how to run the app in a Development environment.
-- [] Follow HTTP standards best practices. 
-- [] Dockerize your app by using docker-compose. We want to be able to easily test your server by just doing `docker-compose up`. 
+### Easily test server by just doing `docker-compose up`. 
